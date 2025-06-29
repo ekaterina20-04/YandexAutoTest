@@ -43,7 +43,7 @@ describe('history util', () => {
         expect(historyUtil.getHistory()).toEqual([]);
     });
 
-    it('addToHistory добавляет новый элемент в начало и возвращает его', () => {
+    it('addToHistory добавляет новый элемент в начало стораж и возвращает его', () => {
         const payload: Omit<HistoryItemType, 'id' | 'timestamp'> = {
             fileName: 'test.txt',
         };
