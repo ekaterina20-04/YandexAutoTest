@@ -33,7 +33,7 @@ describe('history util', () => {
     });
 
     it('getHistory правильно парсит существующую строку JSON', () => {
-        const arr: HistoryItemType[] = [{ id: 'x', timestamp: 1, /* другие поля, например */ foo: 'bar' } as any];
+        const arr: HistoryItemType[] = [{ id: 'x', timestamp: 1, foo: 'bar' } as any];
         localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
         expect(historyUtil.getHistory()).toEqual(arr);
     });
