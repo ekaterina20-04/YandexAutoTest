@@ -42,26 +42,21 @@ describe('GeneratePage', () => {
         render(<GeneratePage />);
         const [btn] = screen.getAllByRole('button', { name: /Начать генерацию/i });
 
-        // клик по кнопке
         await userEvent.click(btn);
 
-        // проверяем, что вызван fetch с правильным URL и методом
         await waitFor(() =>
             expect(global.fetch).toHaveBeenCalledWith(`${API_HOST}/report?size=0.01`, { method: 'GET' })
         );
 
-        // проверяем, что создаётся URL и кликается ссылка
         expect(window.URL.createObjectURL).toHaveBeenCalledWith(csvBlob);
         expect(clickSpy).toHaveBeenCalled();
 
-        // и, наконец, сообщение об успехе
         expect(await screen.findByText('Отчёт успешно сгенерирован!')).toBeInTheDocument();
 
         expect(btn).not.toBeDisabled();
     });
 
     it('показывает ошибку, если fetch упал (сервер недоступен)', async () => {
-        // выбросим ошибку как при падении соединения
         (global.fetch as any).mockRejectedValue(new Error('Failed to fetch'));
 
         render(<GeneratePage />);
@@ -69,10 +64,8 @@ describe('GeneratePage', () => {
 
         await userEvent.click(btn);
 
-        // после ошибки отображается текст ошибки
         expect(await screen.findByText(/Failed to fetch/)).toBeInTheDocument();
 
-        // и кнопка снова разблокирована
         expect(btn).not.toBeDisabled();
     });
 });
