@@ -51,5 +51,3 @@
     ```bash
     npm run test:watch
     ```
-
-> **Примечание:** Конфигурация Vitest находится в корне проекта (`vitest.config.ts`).
